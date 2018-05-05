@@ -1,4 +1,4 @@
-#### How to run
+### How to run
 
 1. Open new terminal then execute command below to create sqlite database file
 
