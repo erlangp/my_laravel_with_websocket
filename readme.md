@@ -1,5 +1,6 @@
 ### How to run
 
+
 1. Open new terminal then execute command below to create sqlite database file
 
     ```bash
@@ -25,5 +26,6 @@
 6. Send request to `http://127.0.0.1:8000/api/products` via GET method in postman
 7. Send request to `http://127.0.0.1:8000/api/products?name=One&price=1000` via POST method in postman
 8. Open/restore browser to see product info that just created
+
 
 EOF
