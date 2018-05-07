@@ -47,7 +47,7 @@ class ProductController extends Controller
 
         if ($product->save()) {
             // Send message to websocket server
-            $client = new \WebSocket\Client("ws://127.0.0.1:8090/");
+            $client = new \WebSocket\Client("ws://127.0.0.1:8092/");
             $client->send("New Product Created: {$product->id} , {$product->name} , {$product->price}");
             $client->send(json_encode([
                 'code'=> 'NEW_PRODUCT_CREATED',
