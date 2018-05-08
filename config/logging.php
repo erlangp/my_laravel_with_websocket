@@ -1,18 +1,17 @@
 <?php
-
 return [
-
+    
     /*
-    |--------------------------------------------------------------------------
-    | Default Log Channel
-    |--------------------------------------------------------------------------
-    |
-    | This option defines the default log channel that gets used when writing
-    | messages to the logs. The name specified in this option should match
-    | one of the channels defined in the "channels" configuration array.
-    |
-    */
-
+     * |--------------------------------------------------------------------------
+     * | Default Log Channel
+     * |--------------------------------------------------------------------------
+     * |
+     * | This option defines the default log channel that gets used when writing
+     * | messages to the logs. The name specified in this option should match
+     * | one of the channels defined in the "channels" configuration array.
+     * |
+     */
+    
     'default' => env('LOG_CHANNEL', 'stack'),
 
     /*
@@ -32,39 +31,41 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => [
+                'single'
+            ]
         ],
-
+        
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
-            'level' => 'debug',
+            'level' => 'debug'
         ],
-
+        
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
-            'days' => 7,
+            'days' => 7
         ],
-
+        
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
-            'level' => 'critical',
+            'level' => 'critical'
         ],
-
+        
         'syslog' => [
             'driver' => 'syslog',
-            'level' => 'debug',
+            'level' => 'debug'
         ],
-
+        
         'errorlog' => [
             'driver' => 'errorlog',
-            'level' => 'debug',
-        ],
-    ],
+            'level' => 'debug'
+        ]
+    ]
 
 ];

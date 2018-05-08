@@ -1,7 +1,6 @@
 <?php
 
 // Erlang Parasu <erlangparasu@gmail.com> 2018-05-05
-
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -12,12 +11,13 @@ use App\Http\Controllers\WebSocketController;
 
 class WebSocketServer extends Command
 {
+
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'websocket:start';
+    protected $signature = 'websocket:serve';
 
     /**
      * The console command description.
@@ -43,14 +43,8 @@ class WebSocketServer extends Command
      */
     public function handle()
     {
-        $server = IoServer::factory(
-            new HttpServer(
-                new WsServer(
-                    new WebSocketController()
-                )
-            ),
-            8092
-        );
+        $server = IoServer::factory(new HttpServer(new WsServer(new WebSocketController())), 8092);
         $server->run();
     }
+    
 }

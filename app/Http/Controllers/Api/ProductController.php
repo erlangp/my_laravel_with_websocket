@@ -17,7 +17,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-
+        
         return response()->json([
             'products' => $products
         ], 200);
@@ -36,7 +36,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,13 +44,13 @@ class ProductController extends Controller
         $product = new Product();
         $product->name = $request->name;
         $product->price = (int) $request->price;
-
+        
         if ($product->save()) {
             // Send message to websocket server
             $client = new \WebSocket\Client("ws://127.0.0.1:8092/");
             $client->send("New Product Created: {$product->id} , {$product->name} , {$product->price}");
             $client->send(json_encode([
-                'code'=> 'NEW_PRODUCT_CREATED',
+                'code' => 'NEW_PRODUCT_CREATED',
                 'data' => [
                     'product' => [
                         'id' => $product->id,
@@ -59,7 +59,7 @@ class ProductController extends Controller
                     ]
                 ]
             ]));
-
+            
             return response()->json([
                 'success' => true,
                 'description' => 'Product saved successfully.',
@@ -82,13 +82,13 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $product = Product::where('id', $id)->first();
-
+        
         return response()->json([
             'product' => $product
         ], 200);
@@ -97,7 +97,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -108,8 +108,8 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -120,11 +120,12 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         return response()->json([], 403);
     }
+    
 }
